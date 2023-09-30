@@ -1,0 +1,193 @@
+{% extends '../layout.html' %}
+{% block content %}
+  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charts</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.1/chart.js" integrity="sha512-HJ+fjW1Hyzl79N1FHXTVgXGost+3N5d1i3rr6URACJItm5CjhEVy2UWlNNmFPHgX94k1RMrGACdmGgVi0vptrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to right,#BFF098 , #6FD6FF);
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            justify-content: space-between;
+        }
+
+        .graph-card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            height:450px;
+        }
+
+        .graph-title {
+            background-color: royalblue;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .graph-canvas {
+            padding: 20px;
+        }
+
+        /* Line Graph Styles */
+        .line-graph {
+            display: flex;
+            flex-direction: column;
+            align-items: right;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 800px;
+            margin-left:60px;
+            
+        }
+
+        .line-graph-title {
+            background-color: royalblue;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .line-graph-canvas {
+            padding: 20px;
+            
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container"style=" margin-left:100px;">
+        <!-- Left Graph (Orders Graph) -->
+        <div class="graph-card">
+            <div class="graph-title">
+                <h2>Orders Graph</h2>
+            </div>
+            <div class="graph-canvas">
+                <canvas id="barchart" width="500" height="500"></canvas>
+            </div>
+        </div>
+
+        <!-- Right Graph (Line Graph) -->
+        
+
+        <!-- Doughnut Graph -->
+        <div class="graph-card" style=" margin-left:350px;">
+            <div class="graph-title">
+                <h2>Donut Graph</h2>
+            </div>
+            <div class="graph-canvas">
+                <canvas id="doughnut" width="400" ></canvas>
+            </div>
+        </div>
+    </div>
+    <div >
+        <div class="line-graph"style=" margin-left:340px;">
+            <div class="line-graph-title">
+                <h2>Line Graph</h2>
+            </div>
+            <div class="line-graph-canvas">
+                <canvas id="linechart" width="700" height="400"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Define your color palette
+        const colors = ['lightblue', 'lightcoral', 'lightgreen', 'lightsalmon', 'lightseagreen', 'lightskyblue'];
+
+        // Line Graph Data
+        const ctxLine = document.getElementById('linechart').getContext('2d');
+        new Chart(ctxLine, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                datasets: [
+                    {
+                        label: 'Data Set 1',
+                        data: [50, 70, 60, 80, 75, 90],
+                        borderColor: 'royalblue',
+                        backgroundColor: 'transparent',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Data Set 2',
+                        data: [30, 45, 55, 65, 70, 80],
+                        borderColor: 'lightcoral',
+                        backgroundColor: 'transparent',
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Bar Chart Data (without color representation)
+        const ctx1 = document.getElementById('barchart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: colors, // Use a single color for all bars
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false // Hide the legend
+                    }
+                }
+            }
+        });
+
+        // Doughnut Chart Data
+        const ctx2 = document.getElementById('doughnut').getContext('2d');
+        new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: colors, // Use your color palette here
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+{% endblock %}
