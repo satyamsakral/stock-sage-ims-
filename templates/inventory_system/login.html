@@ -1,29 +1,33 @@
-{% extends "../layout.html" %}
-{% load crispy_forms_tags %} 
-{% load static %}
-{% block content %} 
-<body class="bg-info font-weight-bold ">
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<div >
-    <div>
-        <img src="/static/css/123.jpg" alt="sda" style=" height:130px; width:130px; border-radius:65px; margin-left:690px; margin-top:15px;">
+{% extends "../components/layout_account.html" %}
+{% load crispy_forms_tags %}
+{% block  title%}Login{% endblock%}
+{% block content %}
+<!-- Login Form -->
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card shadow">
+                <div class="card-title text-center border-bottom">
+                    <h2 class="p-3">Login</h2>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="mb-4">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" />
+                        </div>
+                        <div class="mb-4">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" />
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<div class="content-section bg-info" style = "align-items: center;   margin-left:250px;  margin-top:50px; background: smokewhite;">
-    {{ form.media }} 
-    <form method="POST">
-        <fieldset>
-            <legend class="border-bottom pb-2 mb-4 text-center font-weight-bold">Login Form</legend>
-            {% csrf_token %}
-            <div class="form-group">
-                {{ form|crispy  }}
-            </div>
-            <div class="form-group pt-4">
-                <button class="btn btn-outline-success font-weight-bold btn btn-light" type="submit">Login</button>
-            </div>
-      </fieldset>
-    </form>
-</div>
-</body>
 {% endblock %}

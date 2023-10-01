@@ -16,7 +16,7 @@ def inventory_list(request):
     context = {
         "inventories": inventories
     }
-    return render(request, "inventory/inventory_list.html", context=context)
+    return render(request, "inventory/table.html", context=context)
 
 
 @login_required
@@ -25,7 +25,7 @@ def per_product(request, pk):
     context = {
         'inventory': inventory
     }
-    return render(request, "inventory/per_product_view.html", context=context)
+    return render(request, "inventory/product_view.html", context=context)
 
 def product_update(request):
     return HttpResponse ("hello")
@@ -45,7 +45,7 @@ def add_product(request):
     else:
         updateForm = AddInventoryForm()
 
-    return render(request, "inventory/inventory_add.html", {'form' : updateForm})
+    return render(request, "inventory/product_add.html", {'form' : updateForm})
 
 
 @login_required()
@@ -69,11 +69,11 @@ def update(request, pk):
             inventory.sales = float(inventory.cost_per_item) * float(inventory.quantity_sold)
             inventory.save()
             
-            return redirect(f"/inventory/per_product_view/{pk}")
+            return redirect(f"/inventory")
     else:
         updateForm = InventoryUpdateForm(instance=inventory)
 
-    return render(request, "inventory/inventory_update.html", {'form' : updateForm})
+    return render(request, "inventory/product_view.html", {'form' : updateForm})
 
 
     

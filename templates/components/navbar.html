@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary ">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"> <b>StockSage</b> </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link pull-right active" href="{% url 'inventory_list' %}"> <i class="fas fa-home">
+                            Home
+                        </i></a>
+                </li>
+
+                <li>
+                    <a class="nav-link pull-right active" href="{% url 'inventory_add' %}"><i class="fas ">&#9735; Add
+                            inventory</i></a>
+                </li>
+                <li>
+                    <a class="nav-link pull-right active" href="{% url 'dashboard' %}"><i class="fas fa-chart-bar">
+                            Dashboard</i></a>
+                </li>
+                <li>
+                    <a class="nav-link pull-right active" href="{% url 'logout' %}"><i
+                            class="fas fa-sign-out-alt">Logout</i></a>
+                </li>
+
+                {% endif %}
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>

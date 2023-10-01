@@ -28,5 +28,6 @@ urlpatterns = [
     path("logout/", auth_views.LogoutView.as_view(template_name = "inventory_system/logout.html"), name="logout"),
     
 ]
-urlpatterns += static(settings.STATIC_URL,
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL,
                           document_root=settings.STATIC_ROOT)

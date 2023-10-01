@@ -1,0 +1,48 @@
+{% extends '../components/dashboard/layout_dashboard.html' %} 
+{% load static %} 
+{% block title %} Dashboard-Inventory-Table
+{% endblock%}
+{% block extra_head %} 
+<!-- Custom styles for this page -->
+<link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+<style>
+    #page-top{
+      margin-top: -2% ;
+    }
+    #logo{
+      width: 90%;
+    }
+  </style>
+{% endblock %}
+{% block content %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Product Table</h6>
+            <a href="{% url 'inventory_add' %}">
+                <button class="btn btn-outline-primary">Add Product</button>
+            </a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                {% include "../components/dashboard/table.html" %}
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+{% block extra_script %}
+<!-- Page level plugins -->
+<script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+<!-- Page level custom scripts -->
+<script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+{% endblock %}
+{% endblock %}

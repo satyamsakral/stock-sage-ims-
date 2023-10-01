@@ -1,0 +1,106 @@
+{% extends '../components/dashboard/layout_dashboard.html' %}
+{% load static %}
+{% block title %}
+Product
+{% endblock %}
+{% block extra_head %}
+{% endblock  %}
+{% block content %}
+<!-- Begin Page Content -->
+<div class="container tm-mt-big tm-mb-big m-5">
+  <div class="row">
+    <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+      <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+        <div class="row">
+          <div class="col-12">
+            <h2 class="tm-block-title d-inline-block">Add Product</h2>
+          </div>
+        </div>
+        <div class="row tm-edit-product-row">
+          <div class="col-xl-6 col-lg-6 col-md-12">
+            <form action="" method="post" class="tm-edit-product-form">
+              {% csrf_token %}
+              <div class="form-group mb-3">
+                <label
+                  for="name"
+                  >Product Name
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  class="form-control validate"
+                />
+              </div>
+              <div class="form-group mb-3">
+                <label
+                  for="cost_per_item"
+                  >Cost Per Item</label
+                >
+                <input
+                        id="cost_per_item"
+                        name="cost_per_item"
+                        type="number"
+                        class="form-control validate"
+                      />
+              </div>
+              <div class="row">
+                  <div class="form-group mb-3 col-xs-12 col-sm-6">
+                      <label
+                        for="quantity_in_stock"
+                        >Quantity In Stock
+                      </label>
+                      <input
+                        id="quantity_in_stock"
+                        name="quantity_in_stock"
+                        type="number"
+                        class="form-control validate"
+                      />
+                    </div>
+                    <div class="form-group mb-3 col-xs-12 col-sm-6">
+                      <label
+                        for="quantity_sold"
+                        >Quantity Sold
+                      </label>
+                      <input
+                        id="quantity_sold"
+                        name="quantity_sold"
+                        type="number"
+                        class="form-control validate"
+                      />
+                    </div>
+              </div>
+              
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
+            <div class="tm-product-img-edit mx-auto">
+              <img src="{% static 'img/Image-Not-Available.png' %}" alt="Product image" class="img-fluid d-block mx-auto">
+              <i
+                class="fas fa-cloud-upload-alt tm-upload-icon"
+                onclick="document.getElementById('fileInput').click();"
+              ></i>
+            </div>
+            <div class="custom-file mt-3 mb-3">
+              <input id="fileInput" type="file" style="display:none;" />
+              <input
+                type="button"
+                class="btn btn-primary btn-block mx-auto"
+                value="CHANGE IMAGE NOW"
+                onclick="document.getElementById('fileInput').click();"
+              />
+            </div>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary btn-block text-uppercase">Update Now</button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+{% block extra_script%}
+<!-- Custom scripts for all pages-->
+<script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+{% endblock%}
+{% endblock  %}

@@ -1,193 +1,181 @@
-{% extends '../layout.html' %}
+{% extends '../components/dashboard/layout_dashboard.html' %} {% load static %}
+{% block title %}Dashboard{% endblock%}
+
+<!-- Begin Page Content -->
 {% block content %}
-  
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charts</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.1/chart.js" integrity="sha512-HJ+fjW1Hyzl79N1FHXTVgXGost+3N5d1i3rr6URACJItm5CjhEVy2UWlNNmFPHgX94k1RMrGACdmGgVi0vptrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-image: linear-gradient(to right,#BFF098 , #6FD6FF);
-        }
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+    <a
+      href="#"
+      class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+      ><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a
+    >
+  </div>
 
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 20px;
-            justify-content: space-between;
-        }
+  <!-- Content Row -->
+  {% include '../components/dashboard/contentRow.html'%}
 
-        .graph-card {
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
-            height:450px;
-        }
+  <!-- Content Row -->
 
-        .graph-title {
-            background-color: royalblue;
-            color: white;
-            padding: 10px;
-            text-align: center;
-        }
+  <div class="row">
+    <!-- Area Chart -->
+    {% include "../components/dashboard/areaChart.html" %}
 
-        .graph-canvas {
-            padding: 20px;
-        }
-
-        /* Line Graph Styles */
-        .line-graph {
-            display: flex;
-            flex-direction: column;
-            align-items: right;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 800px;
-            margin-left:60px;
-            
-        }
-
-        .line-graph-title {
-            background-color: royalblue;
-            color: white;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .line-graph-canvas {
-            padding: 20px;
-            
-        }
-
-    </style>
-</head>
-<body>
-    <div class="container"style=" margin-left:100px;">
-        <!-- Left Graph (Orders Graph) -->
-        <div class="graph-card">
-            <div class="graph-title">
-                <h2>Orders Graph</h2>
-            </div>
-            <div class="graph-canvas">
-                <canvas id="barchart" width="500" height="500"></canvas>
-            </div>
-        </div>
-
-        <!-- Right Graph (Line Graph) -->
-        
-
-        <!-- Doughnut Graph -->
-        <div class="graph-card" style=" margin-left:350px;">
-            <div class="graph-title">
-                <h2>Donut Graph</h2>
-            </div>
-            <div class="graph-canvas">
-                <canvas id="doughnut" width="400" ></canvas>
-            </div>
-        </div>
-    </div>
-    <div >
-        <div class="line-graph"style=" margin-left:340px;">
-            <div class="line-graph-title">
-                <h2>Line Graph</h2>
-            </div>
-            <div class="line-graph-canvas">
-                <canvas id="linechart" width="700" height="400"></canvas>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Define your color palette
-        const colors = ['lightblue', 'lightcoral', 'lightgreen', 'lightsalmon', 'lightseagreen', 'lightskyblue'];
-
-        // Line Graph Data
-        const ctxLine = document.getElementById('linechart').getContext('2d');
-        new Chart(ctxLine, {
-            type: 'line',
-            data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-                datasets: [
-                    {
-                        label: 'Data Set 1',
-                        data: [50, 70, 60, 80, 75, 90],
-                        borderColor: 'royalblue',
-                        backgroundColor: 'transparent',
-                        borderWidth: 2
-                    },
-                    {
-                        label: 'Data Set 2',
-                        data: [30, 45, 55, 65, 70, 80],
-                        borderColor: 'lightcoral',
-                        backgroundColor: 'transparent',
-                        borderWidth: 2
-                    }
-                ]
+    <!-- Pie Chart -->
+    {% include "../components/dashboard/pieChart.html" %}
+  </div>
+</div>
+{% block extra_script%} 
+{% include "../components/dashboard/dashboard_script.html" %}
+<script>
+  // Area Chart Example
+  var ctx = document.getElementById("myAreaChart");
+  var myLineChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ],
+      datasets: [
+        {
+          label: "Earnings",
+          lineTension: 0.3,
+          backgroundColor: "rgba(78, 115, 223, 0.05)",
+          borderColor: "rgba(78, 115, 223, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointBorderColor: "rgba(78, 115, 223, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: [
+            0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000,
+            25000, 40000,
+          ],
+        },
+      ],
+    },
+    options: {
+      maintainAspectRatio: false,
+      layout: {
+        padding: {
+          left: 10,
+          right: 25,
+          top: 25,
+          bottom: 0,
+        },
+      },
+      scales: {
+        xAxes: [
+          {
+            time: {
+              unit: "date",
             },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-
-        // Bar Chart Data (without color representation)
-        const ctx1 = document.getElementById('barchart').getContext('2d');
-        new Chart(ctx1, {
-            type: 'bar',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: colors, // Use a single color for all bars
-                    borderWidth: 1
-                }]
+            gridLines: {
+              display: false,
+              drawBorder: false,
             },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false // Hide the legend
-                    }
-                }
-            }
-        });
-
-        // Doughnut Chart Data
-        const ctx2 = document.getElementById('doughnut').getContext('2d');
-        new Chart(ctx2, {
-            type: 'doughnut',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: colors, // Use your color palette here
-                    borderWidth: 1
-                }]
+            ticks: {
+              maxTicksLimit: 7,
             },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
-
-{% endblock %}
+          },
+        ],
+        yAxes: [
+          {
+            ticks: {
+              maxTicksLimit: 5,
+              padding: 10,
+              // Include a dollar sign in the ticks
+              callback: function (value, index, values) {
+                return "$" + number_format(value);
+              },
+            },
+            gridLines: {
+              color: "rgb(234, 236, 244)",
+              zeroLineColor: "rgb(234, 236, 244)",
+              drawBorder: false,
+              borderDash: [2],
+              zeroLineBorderDash: [2],
+            },
+          },
+        ],
+      },
+      legend: {
+        display: false,
+      },
+      tooltips: {
+        backgroundColor: "rgb(255,255,255)",
+        bodyFontColor: "#858796",
+        titleMarginBottom: 10,
+        titleFontColor: "#6e707e",
+        titleFontSize: 14,
+        borderColor: "#dddfeb",
+        borderWidth: 1,
+        xPadding: 15,
+        yPadding: 15,
+        displayColors: false,
+        intersect: false,
+        mode: "index",
+        caretPadding: 10,
+        callbacks: {
+          label: function (tooltipItem, chart) {
+            var datasetLabel =
+              chart.datasets[tooltipItem.datasetIndex].label || "";
+            return datasetLabel + ": $" + number_format(tooltipItem.yLabel);
+          },
+        },
+      },
+    },
+  });
+</script>
+<script>
+  // Pie Chart Example
+  var ctx = document.getElementById("myPieChart");
+  var myPieChart = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: ["Direct", "Referral", "Social"],
+      datasets: [
+        {
+          data: [55, 30, 15],
+          backgroundColor: ["#4e73df", "#1cc88a", "#36b9cc"],
+          hoverBackgroundColor: ["#2e59d9", "#17a673", "#2c9faf"],
+          hoverBorderColor: "rgba(234, 236, 244, 1)",
+        },
+      ],
+    },
+    options: {
+      maintainAspectRatio: false,
+      tooltips: {
+        backgroundColor: "rgb(255,255,255)",
+        bodyFontColor: "#858796",
+        borderColor: "#dddfeb",
+        borderWidth: 1,
+        xPadding: 15,
+        yPadding: 15,
+        displayColors: false,
+        caretPadding: 10,
+      },
+      legend: {
+        display: false,
+      },
+      cutoutPercentage: 80,
+    },
+  });
+</script>
+{% endblock%} {% endblock %}
