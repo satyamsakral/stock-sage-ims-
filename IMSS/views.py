@@ -58,7 +58,7 @@ def delete(request, pk):
 
 @login_required()
 def update(request, pk):
-    inventory = get_object_or_404(Inventory, pk=pk)
+    inventory = get_object_or_404(Inventory, id=pk)
     if request.method == "POST":
         updateForm = InventoryUpdateForm(data=request.POST)
         if updateForm.is_valid():
@@ -73,7 +73,7 @@ def update(request, pk):
     else:
         updateForm = InventoryUpdateForm(instance=inventory)
 
-    return render(request, "inventory/product_view.html", {'form' : updateForm})
+    return render(request, "inventory/product_view.html", {'form' : updateForm,'id':pk})
 
 
     
