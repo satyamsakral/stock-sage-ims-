@@ -72,7 +72,7 @@ def update(request, pk):
             return redirect(f"/inventory")
     else:
         updateForm = InventoryUpdateForm(instance=inventory)
-
+# updated
     return render(request, "inventory/product_view.html", {'form' : updateForm,'id':pk})
 
 
